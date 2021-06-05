@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">APPDenuncias</string>
+    <string name="btn_anadir_comunicacion">Añadir comunicación</string>
+    <string name="btn_comunicaciones_enviadas">Comunicaciones enviadas</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="btn_iniciar_sesion">Iniciar Sesión</string>
+    <string name="tf_olvidaste_contrasena">¿Olvidaste la contraseña?</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="welcome">"Bienvenido !"</string>
+    <string name="invalid_username">El usuario registrado no es válido</string>
+    <string name="invalid_password">La contraseña necesita al menos 8 caracteres</string>
+    <string name="login_failed">"Error al iniciar sesión"</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="parrafo"><b>AppDenuncias</b> es una empresa dedicada y comprometida con las personas. Surge tras la necesidad de crear un entorno laboral basándose en los principios fundamentales definidos por la OMS sobre entorno
+            laboral saludable:
+    </string>
+
+    <string name="punto_uno">1. El compromiso de los empleadores basado en valores fundamentales.</string>
+    <string name="punto_dos">2. Incluir a los trabajadores y sus representantes.</string>
+    <string name="punto_tres">3. Análisis de brechas.</string>
+    <string name="punto_cuatro">4. Aprender de otros.</string>
+    <string name="punto_cinco">5. Sostenibilidad.</string>
+    <string name="punto_seis">6. La importancia de la integración.</string>
+
+    <string name="parrafo_dos">Estos puntos se basan en los principios de salud y seguridad en el entorno laboral, tanto en el ámbito físico como en el psicosocial,
+            la cultura organizacional, el estilo de vida saludable y la responsabilidad social corporativa.
+            Bajo estos fundamentos, se pretende generar un entorno favorable y colectivo donde los trabajadores se sientan cómodos
+            y puedan expresarse de forma libre.
+            Por tanto, el objetivo principal de nuestra empresa es mejorar la satisfacción del trabajador y resolver de forma fácil
+            y rápida las distintas opiniones, incidencias y sugerencias del empleado.</string>
+
+
+    <string name="frase_final"><i>“La riqueza de las empresas depende de la salud de los trabajadores.”</i></string>
+    <string name="firma">Dra. Maria Neira, Directora, Departamento de Salud Pública y Ambiente,
+                Organización Mundial de la Salud</string>
+
+    <!-- Texto de la activity add comunicación -->
+    <string name="tf_add_comunicacion">Nueva incidencia</string>
+    <string name="tf_nombre_empleado">Empleado/a:</string>
+    <string name="tf_comunicacion_anonima">Comunicación anónima</string>
+    <string name="switch_anonimo">NO/SÍ  </string>
+    <string name="btn_enviar">Enviar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sincronizar el correo electrónico periódicamente</string>
+    <string name="attachment_title">Descargar archivos adjuntos entrantes</string>
+    <string name="attachment_summary_on">Descargar automáticamente archivos adjuntos para correos electrónicos entrantes</string>
+    <string name="attachment_summary_off">Descargue archivos adjuntos solo cuando se soliciten manualmente</string>
+
+</resources>
