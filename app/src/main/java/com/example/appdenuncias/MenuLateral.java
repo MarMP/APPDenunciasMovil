@@ -77,6 +77,22 @@ public class MenuLateral extends AppCompatActivity {
                         fragment = new InicioFragment();
                         loadFragment (fragment);
                         break;
+                    case R.id.anadir_comunicacion:
+                        fragment = new AnadirComunicacionFragment();
+                        loadFragment (fragment);
+                        break;
+                    case R.id.mis_comunicaciones:
+                        fragment = new MisComunicacionesFragment();
+                        loadFragment (fragment);
+                        break;
+                    case R.id.alertas:
+                        fragment = new AlertasFragment();
+                        loadFragment (fragment);
+                        break;
+                    case R.id.noticias:
+                        fragment = new NoticiasFragment();
+                        loadFragment (fragment);
+                        break;
                     case R.id.profile:
                         fragment = new ProfileFragment();
                         loadFragment(fragment);

@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
     private static final int REQUEST_IMAGE_GALLERY = 101;
 
     RequestQueue requestQueue;
-    private static final String URL = "http://192.168.1.103/appdenunciasphp/perfil.php?id=" ;
+    private static final String URL = GlobalIp.IP+"appdenunciasphp/perfil.php?id=" ;
     //private static final String URL = "http://192.168.1.103/appdenunciasphp/listar.php?id=" + 16;
 
     public ProfileFragment() {

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private String email, password, id;
-    private String URL = "http://192.168.1.103/appdenunciasphp/pdo/login.php";
+    private String URL = GlobalIp.IP+"appdenunciasphp/pdo/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

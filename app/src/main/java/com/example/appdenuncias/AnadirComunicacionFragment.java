@@ -1,17 +1,19 @@
 package com.example.appdenuncias;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,8 +28,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NuevaComunicacion extends AppCompatActivity {
 
+public class AnadirComunicacionFragment extends Fragment {
     private TextInputLayout textInputAnadirComunicacion, textInputAnadirEmpleado;
     private SwitchCompat switchComunicacionAnonima;
     private Spinner spinnerDepartamentos, spinnerTipoComunicacion;
@@ -37,20 +39,24 @@ public class NuevaComunicacion extends AppCompatActivity {
     RequestQueue requestQueue;
     private static final String URL = GlobalIp.IP+"appdenunciasphp/insertar.php";
 
+    public AnadirComunicacionFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nueva_comunicacion);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v =  inflater.inflate(R.layout.fragment_anadir_comunicacion, container, false);
+        textInputAnadirComunicacion = v.findViewById(R.id.text_input_anadir);
+        textInputAnadirEmpleado = v.findViewById(R.id.text_input_empleado);
+        switchComunicacionAnonima = v.findViewById(R.id.switch_anonimo);
+        spinnerDepartamentos = v.findViewById(R.id.spinner_departamento);
+        spinnerTipoComunicacion = v.findViewById(R.id.spinner_tipo_comunucacion);
+        enviar = v.findViewById(R.id.btnAnadirComunicacion);
+        cancelar = v.findViewById(R.id.btnCancelarComunicacion);
 
-        textInputAnadirComunicacion = findViewById(R.id.text_input_anadir);
-        textInputAnadirEmpleado = findViewById(R.id.text_input_empleado);
-        switchComunicacionAnonima = findViewById(R.id.switch_anonimo);
-        spinnerDepartamentos = findViewById(R.id.spinner_departamento);
-        spinnerTipoComunicacion = findViewById(R.id.spinner_tipo_comunucacion);
-        enviar = findViewById(R.id.btnAnadirComunicacion);
-        cancelar = findViewById(R.id.btnCancelarComunicacion);
-
-        SharedPreferences sharedPreferences = this.getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("preferencias", Context.MODE_PRIVATE);
         idUsuario = sharedPreferences.getString("id", "16");
         Log.i("idUsuario", idUsuario);
 
@@ -59,45 +65,58 @@ public class NuevaComunicacion extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     textInputAnadirEmpleado.getEditText().setText("Anónimo");
-                    Toast.makeText(getApplicationContext(),"El mensaje se enviará de forma anónima", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"El mensaje se enviará de forma anónima", Toast.LENGTH_LONG).show();
                 } else {
                     String texto = textInputAnadirEmpleado.getEditText().getText().toString().trim();
                     if (texto.isEmpty()) {
                         textInputAnadirEmpleado.setError("El campo no puede estar vacío");
                     } else if (!texto.equals("Anónimo")){
-                        Toast.makeText(getApplicationContext(),"El mensaje no será anónimo", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"El mensaje no será anónimo", Toast.LENGTH_LONG).show();
                     }
 
                 }
             }
         });
-        requestQueue = Volley.newRequestQueue(this);
-    }
 
-    //Botón aceptar
-    public void aceptar (View v) {
-        if (noActivo() | !validarComunicacion()) {
-            Toast.makeText(getApplicationContext(),"El mensaje no será anónimo", Toast.LENGTH_LONG).show();
-        }
-        String empleado = textInputAnadirEmpleado.getEditText().getText().toString().trim();
-        String tipoComunicacion = spinnerTipoComunicacion.getSelectedItem().toString();
-        String departamento = spinnerDepartamentos.getSelectedItem().toString();
-        String comunicacion = textInputAnadirComunicacion.getEditText().getText().toString().trim();
+        enviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (noActivo() | !validarComunicacion()) {
+                    Toast.makeText(getContext(),"El mensaje no será anónimo", Toast.LENGTH_LONG).show();
+                }
+                String empleado = textInputAnadirEmpleado.getEditText().getText().toString().trim();
+                String tipoComunicacion = spinnerTipoComunicacion.getSelectedItem().toString();
+                String departamento = spinnerDepartamentos.getSelectedItem().toString();
+                String comunicacion = textInputAnadirComunicacion.getEditText().getText().toString().trim();
 
-        insertarComunicacion(empleado, tipoComunicacion, departamento,comunicacion);
+                insertarComunicacion(empleado, tipoComunicacion, departamento,comunicacion);
+            }
+        });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textInputAnadirComunicacion.getEditText().setText("");
+                textInputAnadirEmpleado.getEditText().setText("");
+                switchComunicacionAnonima.setChecked(false);
+            }
+        });
+
+        requestQueue = Volley.newRequestQueue(getContext());
+        return v;
     }
 
     private void insertarComunicacion(final  String empleado, final String tipoComunicacion, final String departamento, final String comunicacion) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(NuevaComunicacion.this, "Comunicación enviada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Comunicación enviada", Toast.LENGTH_SHORT).show();
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(NuevaComunicacion.this, "La comunicación no se ha podido enviar", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "La comunicación no se ha podido enviar", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -115,12 +134,6 @@ public class NuevaComunicacion extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-    }
-
-    public void cancelar (View v) {
-        textInputAnadirComunicacion.getEditText().setText("");
-        textInputAnadirEmpleado.getEditText().setText("");
-        switchComunicacionAnonima.setChecked(false);
     }
 
     //Validaciones de los campos
@@ -142,9 +155,4 @@ public class NuevaComunicacion extends AppCompatActivity {
         }
         return true;
     }
-
-
 }
-
-
-

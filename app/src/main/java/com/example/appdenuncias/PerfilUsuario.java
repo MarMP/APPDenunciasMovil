@@ -47,7 +47,7 @@ public class PerfilUsuario extends AppCompatActivity {
     private static final int REQUEST_IMAGE_GALLERY = 101;
 
     RequestQueue requestQueue;
-    private static final String URL = "http://192.168.1.103/appdenunciasphp/perfil.php?id=" ;
+    private static final String URL = GlobalIp.IP+"appdenunciasphp/perfil.php?id=" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
